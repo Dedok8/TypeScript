@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .mb:not(:last-child) {
+        margin-bottom: 10px;
+      }
+      ul > ol:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex">
+      <ul style="width: 70%">
+        <ol id="error"></ol>
+        <ol id="task1"></ol>
+        <ol id="task2"></ol>
+        <ol id="task3"></ol>
+        <ol id="task4"></ol>
+        <ol id="task5"></ol>
+        <ol id="task6"></ol>
+        <ol id="task7"></ol>
+      </ul>
+      <div style="width: 30%">
+        <div class="mb">
+          <button id="btnTask1">Задача 1</button>
+        </div>
+        <div class="mb">
+          <button id="btnTask2">Задача 2</button>
+        </div>
+        <div class="mb">
+          <button id="btnTask3">Задача 3</button>
+        </div>
+        <div class="mb">
+          <button id="btnTask4">Задача 4</button>
+        </div>
+        <div class="mb">
+          <button id="btnTask6">Задача 6</button>
+        </div>
+        <div class="mb">
+          <button id="btnTask7">Задача 7</button>
+        </div>
+      </div>
+    </div>
+    <script src="./javaScript/index.js"></script>
+  </body>
+</html>

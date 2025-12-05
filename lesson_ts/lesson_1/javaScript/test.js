@@ -51,21 +51,12 @@ function startTask3() {
     const totalPrice = product1[3] + product2[3];
     const res3 = document.getElementById("res3");
     if (res3) {
-<<<<<<< HEAD
         res3.innerHTML = `
       <h3>Чек про покупку товару</h3>
       <p>${product1[0]}: ${product1[2]} × ${product1[1]} грн = <b>${product1[3]} грн</b></p>
       <p>${product2[0]}: ${product2[2]} × ${product2[1]} грн = <b>${product2[3]} грн</b></p>
       <hr>
       <p><b>Разом: ${totalPrice} грн</b></p>
-=======
-        res3.innerHTML = `
-      <h3>Чек про покупку товару</h3>
-      <p>${product1[0]}: ${product1[2]} × ${product1[1]} грн = <b>${product1[3]} грн</b></p>
-      <p>${product2[0]}: ${product2[2]} × ${product2[1]} грн = <b>${product2[3]} грн</b></p>
-      <hr>
-      <p><b>Разом: ${totalPrice} грн</b></p>
->>>>>>> c4dfcfd654b7033aac6d87ec7e6b09b5627b967a
     `;
     }
 }

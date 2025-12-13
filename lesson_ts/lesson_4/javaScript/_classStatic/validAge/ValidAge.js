@@ -1,0 +1,22 @@
+"use strict";
+// Валідація величин без створення екземпляра.
+// Статичний метод дозволяє перевіряти дані перед створенням об’єкта.
+class ValidData {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    static isValid(name, age) {
+        return name.trim().length > 0 && age >= 18;
+    }
+    [Symbol.toPrimitive](hint) {
+        switch (hint) {
+            case "string":
+                return `Name: ${this.name}, Age: ${this.age}`;
+            case "number":
+                return this.age;
+            default:
+                return `${this.name} (${this.age})`;
+        }
+    }
+}

@@ -14,7 +14,7 @@ const t1 = new ToJSON();
 const t2 = new ToNumber();
 const t3 = new ToString();
 console.log(t1.transform({ name: "Ivan", age: 33 }));
-console.log(t2.transform("55"));
+console.log(t2.transform("77"));
 console.log(t3.transform(55));
 console.log("===============================================");
 const task_4 = printAll([

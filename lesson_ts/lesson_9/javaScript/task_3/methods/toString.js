@@ -1,5 +1,5 @@
 export default class ToString {
     transform(value) {
-        return value.toString();
+        return String(value);
     }
 }

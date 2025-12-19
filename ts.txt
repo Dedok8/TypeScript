@@ -3,3 +3,7 @@ npm install -g typescript
 tsc --init
 
 tsc --watch
+
+npm install --save-dev typedoc
+
+npx typedoc "src/**/*.ts"

@@ -2,7 +2,7 @@
 // Розроби клас GameManager, який зберігає поточний рівень, кількість очок, життя гравця тощо.
 // Використай Singleton, щоб цей стан був спільним для всієї гри.
 
-class GameManager {
+export default class GameManager {
   private static _instance: GameManager;
 
   constructor(
@@ -18,5 +18,3 @@ class GameManager {
     return this._instance;
   }
 }
-
-export default GameManager;

@@ -1,3 +1,4 @@
+import GameManager from "./Singltone/GameManager.js";
 import DesktopLearningUIFactory from "./Abstract Factory/DesktopLearningUIFactory.js";
 import MobileLearningUIFactory from "./Abstract Factory/MobileLearningUIFactory.js";
 import WebLearningUIFactory from "./Abstract Factory/WebLearningUIFactory.js";
@@ -23,7 +24,6 @@ import { BikeFactory, CarFactory, getFactory, settings, TruckFactory, } from "./
 import GameCharacter from "./Prototype/GameCharacter.js";
 import DocumentService from "./Proxy/RealDocumentService.js";
 import SecureDocumentProxy from "./Proxy/SecureDocumentProxy.js";
-import GameManager from "./Singltone/GameManager.js";
 const game = GameManager.getInstance();
 console.log(game);
 console.log("===============================================");

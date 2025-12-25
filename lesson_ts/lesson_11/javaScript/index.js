@@ -1,0 +1,113 @@
+import DesktopLearningUIFactory from "./Abstract Factory/DesktopLearningUIFactory.js";
+import MobileLearningUIFactory from "./Abstract Factory/MobileLearningUIFactory.js";
+import WebLearningUIFactory from "./Abstract Factory/WebLearningUIFactory.js";
+import CryptoAdapter from "./Adapter/adapter/CryptoAdapter.js";
+import PayPalAdapter from "./Adapter/adapter/PayPalAdapter.js";
+import StripeAdapter from "./Adapter/adapter/StripeAdapter.js";
+import CryptoGatewayService from "./Adapter/services/CryptoGatewayService.js";
+import PayPalService from "./Adapter/services/PayPalService.js";
+import StripeService from "./Adapter/services/StripeService.js";
+import HouseBuilder from "./Builder/HouseBuilder.js";
+import Category from "./Composite/Category.js";
+import Product from "./Composite/Product.js";
+import Coffee from "./Decorator/Coffee.js";
+import ChocolateDecorator from "./Decorator/decorators/ChocolateDecorator.js";
+import MilkDecorator from "./Decorator/decorators/MilkDecorator.js";
+import SugarDecorator from "./Decorator/decorators/SugarDecorator.js";
+import MediaFacade from "./Facade/MediaFacade.js";
+import AudioPlayer from "./Facade/methods/AudioPlayer.js";
+import Equalizer from "./Facade/methods/Equalizer.js";
+import PlaylistManager from "./Facade/methods/PlaylistManager.js";
+import VideoPlayer from "./Facade/methods/VideoPlayer.js";
+import { BikeFactory, CarFactory, getFactory, settings, TruckFactory, } from "./Factory Method/VehicleFactory.js";
+import GameCharacter from "./Prototype/GameCharacter.js";
+import DocumentService from "./Proxy/RealDocumentService.js";
+import SecureDocumentProxy from "./Proxy/SecureDocumentProxy.js";
+import GameManager from "./Singltone/GameManager.js";
+const game = GameManager.getInstance();
+console.log(game);
+console.log("===============================================");
+const factory1 = getFactory(settings.vehicleType);
+const vehicle1 = factory1.createVehicle();
+vehicle1.drive();
+console.log();
+const carFactory = new CarFactory();
+const car = carFactory.createVehicle();
+car.drive();
+const bikeFactory = new BikeFactory();
+const bike = bikeFactory.createVehicle();
+bike.drive();
+const truckFactory = new TruckFactory();
+const truck = truckFactory.createVehicle();
+truck.drive();
+console.log("===============================================");
+function LearningUIFactoryFn(factory) {
+    const lesson = factory.createLessonView();
+    const quiz = factory.createQuizComponent();
+    const progressTracker = factory.createProgressTracker();
+    lesson.renderLessonView();
+    quiz.renderQuizComponent();
+    progressTracker.renderProgressTracker();
+}
+LearningUIFactoryFn(new WebLearningUIFactory());
+console.log("-----------------------------------------------");
+LearningUIFactoryFn(new MobileLearningUIFactory());
+console.log("-----------------------------------------------");
+LearningUIFactoryFn(new DesktopLearningUIFactory());
+console.log("===============================================");
+const house = new HouseBuilder()
+    .setFoundation("бетонний фундамент")
+    .setWalls("цегляні стіни")
+    .setRoof("металочерепиця")
+    .setWindows(6)
+    .setDoors(2)
+    .build();
+console.log(house);
+console.log("===============================================");
+const player1 = new GameCharacter("Ivan", 3, ["speed", "strong"], ["sword", "shield"]);
+const player2 = player1.clone();
+player2.name = "Olga";
+player2.level = 10;
+console.log(player1);
+console.log(player2);
+console.log("===============================================");
+function paymentServise(provider, amount) {
+    provider.pay(amount);
+}
+paymentServise(new PayPalAdapter(new PayPalService()), 100);
+paymentServise(new CryptoAdapter(new CryptoGatewayService()), 100);
+paymentServise(new StripeAdapter(new StripeService()), 100);
+console.log("===============================================");
+const mediaFacade = new MediaFacade(new AudioPlayer(), new VideoPlayer(), new Equalizer(), new PlaylistManager());
+mediaFacade.playMovie("Supernatural.mp4");
+console.log("===============================================");
+let coffee = new Coffee();
+coffee = new MilkDecorator(coffee);
+coffee = new SugarDecorator(coffee);
+coffee = new ChocolateDecorator(coffee);
+console.log(coffee.getDescription());
+console.log(coffee.getCost());
+console.log("===============================================");
+const phone = new Product("Iphone", 40000);
+const laptop = new Product("Lenovo", 30000);
+const electronics = new Category("Electronics");
+electronics.add(phone);
+electronics.add(laptop);
+console.log(electronics.getTotalPrice());
+const apple = new Product("Apple", 20);
+const banana = new Product("Banana", 50);
+const fruits = new Category("Fruits");
+fruits.add(apple);
+fruits.add(banana);
+console.log(fruits.getTotalPrice());
+console.log("Видалив яблука");
+fruits.remove(apple);
+console.log(fruits.getTotalPrice());
+console.log("===============================================");
+const realServise = new DocumentService();
+const admin = new SecureDocumentProxy(realServise, "admin");
+const guest = new SecureDocumentProxy(realServise, "guest");
+const user = new SecureDocumentProxy(realServise, "user");
+console.log(admin.readDocument(2));
+console.log(guest.readDocument(2));
+console.log(user.readDocument(3));

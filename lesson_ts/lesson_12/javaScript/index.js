@@ -1,0 +1,53 @@
+import RateLimitHandler from "./API/RateLimitHandler.js";
+import RequestProcessor from "./API/RequestProcessor.js";
+import RoleCheckHandler from "./API/RoleCheckHandler.js";
+import TokenValidationHandler from "./API/TokenValidationHandler.js";
+import BankAccount from "./BankAccount/BankAccount.js";
+import EmailNotifier from "./BankAccount/methods/EmailNotifier.js";
+import Logger from "./BankAccount/methods/Logger.js";
+import SMSNotifier from "./BankAccount/methods/SMSNotifier.js";
+import MoveDownCommand from "./Drone/comands/MoveDownCommand.js";
+import MoveUpCommand from "./Drone/comands/MoveUpCommand.js";
+import TurnLeftCommand from "./Drone/comands/TurnLeftCommand.js";
+import Controller from "./Drone/Controller.js";
+import Drone from "./Drone/Drone.js";
+import CreditCardPayment from "./PaymentStrategy/methods/CreditCardPayment.js";
+import CryptoPayment from "./PaymentStrategy/methods/CryptoPayment.js";
+import PaymentProcessor from "./PaymentStrategy/PaymentProcessor.js";
+import TrafficLight from "./TrafficLight/TrafficLight.js";
+const processor = new PaymentProcessor(new CreditCardPayment());
+processor.processPayment(1000);
+processor.setStrategy(new CryptoPayment());
+processor.processPayment(1500);
+// processor.setStrategy(new PayPalPayment());
+// processor.processPayment(500);
+console.log("===============================================");
+const account = new BankAccount();
+account.subscribe(new SMSNotifier());
+account.subscribe(new EmailNotifier());
+account.subscribe(new Logger());
+account.deposit(1000);
+account.withdraw(300);
+console.log("===============================================");
+const light = new TrafficLight();
+light.autoCycle(7);
+console.log("===============================================");
+const drone = new Drone();
+const controller = new Controller();
+controller.executeCommand(new MoveUpCommand(drone));
+controller.executeCommand(new TurnLeftCommand(drone));
+controller.executeCommand(new MoveDownCommand(drone));
+controller.undoLast();
+controller.undoLast();
+console.log("===============================================");
+const tokenHandler = new TokenValidationHandler();
+const roleHandler = new RoleCheckHandler(["admin"]);
+const rateLimitHandler = new RateLimitHandler(5);
+const processors = new RequestProcessor();
+tokenHandler.setNext(roleHandler).setNext(rateLimitHandler).setNext(processors);
+const request = {
+    token: "jwt-token",
+    role: "admin",
+    requestCount: 3,
+};
+tokenHandler.handle(request);

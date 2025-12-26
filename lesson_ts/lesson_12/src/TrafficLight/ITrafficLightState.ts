@@ -1,0 +1,14 @@
+// Задача 3. Стан світлофора (Traffic Light)
+//  Завдання:  Реалізуй клас TrafficLight, який циклічно переходить між станами:
+//  Red,
+//  Yellow,
+//  Green.
+//  Кожен стан має метод next(), який змінює поточний стан, і signal(), який виводить колір світла.
+//  Можна додати метод autoCycle() для демонстрації повного циклу.
+
+import TrafficLight from "./TrafficLight.js";
+
+export default interface ITrafficLightState {
+  next(light: TrafficLight): void;
+  signal(): string;
+}
